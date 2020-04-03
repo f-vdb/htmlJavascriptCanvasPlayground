@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <style>
+        body {
+            margin: 20px;
+            background-color: #ffffff;
+            font-family: 'Helvetica';
+            color: lightgray;
+            text-align: center;
+        }
+
+
+        container {
+            min-width: 600px;
+            border: 5px solid black;
+            background-color: darkslateblue;
+            border-radius: 10%;
+            text-align: center;
+        }
+
+
+        canvas {
+            /* margin: 20px; */
+            background-color: #132327;
+            /* border: 5px dashed darkslateblue; */
+            border-radius: 5%;
+            display: inline-block;
+        }
+    </style>
+    <div></div>
+</head>
+
+<body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <script>
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        var raf;
+
+        function randomNumber(lowerBoundInclusive, upperBoundInclusive) {
+            var z = Math.random();
+            z *= (upperBoundInclusive - lowerBoundInclusive + 1);
+            z += lowerBoundInclusive;
+            random = (Math.floor(z))
+            if (random === 0) {
+                randomNumber(lowerBoundInclusive, upperBoundInclusive);
+            } 
+            return random;
+        }
+        var ball = {
+            /* startX: randomNumber(10, 15),
+            startY: randomNumber(10, 15), 
+            x: this.startX,
+            y: this.startY, */
+
+            x: randomNumber(0, 500),
+            y: randomNumber(0, 500), 
+             
+            
+            
+            vx: randomNumber(-5, 5),
+            vy: randomNumber(-5, 5),
+            radius: 5,
+            color: 'grey',
+            draw: function () {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+                ctx.closePath();
+                ctx.fillStyle = this.color;
+                ctx.fill();
+
+
+            }
+        };
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ball.draw();
+            ball.x += ball.vx;
+            ball.y += ball.vy;
+            raf = window.requestAnimationFrame(draw);
+     
+        }
+        //document.write(ball.x)
+        document.write(ball.x);
+        document.write("     --    ");
+        document.write(ball.y)
+        draw();
+
+    </script>
+</body>
+
+</html>
