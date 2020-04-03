@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <style>
+        body {
+            margin: 20px;
+            background-color: slategrey;
+            font-family: 'Helvetica';
+            color: lightgray;
+            text-align: center;
+        }
+
+
+        .container {
+            min-width: 600px;
+            border: 5px solid black;
+            background-color: darkslateblue;
+            border-radius: 10%;
+            text-align: center;
+        }
+
+
+        .canvas {
+            margin: 20px;
+            background-color: lightgray;
+            border: 5px dashed darkslateblue;
+            border-radius: 5%;
+            display: inline-block;
+        }
+    </style>
+    <div></div>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="578" height="200"></canvas>
+    <script>
+        function drawDot(context) {
+            context.beginPath();
+            c.arc(1,1, 1, 1, 2 * Math.PI,false)
+            c.fillStyle = "#000000"
+            c.fill();
+        }
+
+        var canvas = document.getElementById('myCanvas');
+        var c = canvas.getContext('2d');
+
+        drawDot(c);
+        /* c.fillStyle = "#FF0000"
+        c.fillRect(20, 20, 150, 100)
+        var centerX = canvas.width / 2;
+        var centerY = canvas.height / 2;
+        var radius = 70;
+
+        c.beginPath();
+        c.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+        c.fillStyle = 'green';
+        c.fill();
+        c.lineWidth = 5;
+        c.strokeStyle = '#003300';
+        c.stroke(); */
+    </script>
+</body>
+
+</html>
