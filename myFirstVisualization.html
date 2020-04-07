@@ -49,7 +49,55 @@
             } 
             return random;
         }
+
+        function createXY() {
+            var side = randomNumber(1,4);
+            if (side == 4) {
+                var x = 0;
+                var y = randomNumber(0, 500)
+                var vx = randomNumber(0, 2);
+                var vy = randomNumber(-2, 2)
+                return [x, y, vx, vy];
+            } else if (side == 3) {
+                var x = randomNumber(0, 500);
+                var y = 500;
+                var vx = randomNumber(-2, 2);
+                var vy = randomNumber(-2, 0)
+                return [x, y, vx, vy];
+            } else if (side == 2) {
+                var x = 500;
+                var y = randomNumber(0, 500);
+                var vx = randomNumber(-2, 0);
+                var vy = randomNumber(-2, 2)
+                return [x, y, vx, vy];
+            } else {
+                var x = randomNumber(0, 500);
+                var y = 0;
+                var vx = randomNumber(-2, 2);
+                var vy = randomNumber(0, 2)
+                return [x, y, vx, vy];
+            }
+        }
+
+        function buildBall() {
+            let xy = new createXY();
+            this.x = xy[0];
+            this.y = xy[1];
+            this.vx = xy[2];
+            this.vy = xy[3];
+            this.radius = 2;
+            this.color = 'grey';
+
+            this.draw = function() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+                ctx.closePath();
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
         var ball = {
+
             /* startX: randomNumber(10, 15),
             startY: randomNumber(10, 15), 
             x: this.startX,
@@ -73,20 +121,29 @@
 
 
             }
-        };
+        }
+
+        let ballA = new buildBall();
+        var balls = [];
+        for(var i = 0; i <= 10; i++) {
+            balls.push(new buildBall());
+        }
+        
 
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ball.draw();
-            ball.x += ball.vx;
-            ball.y += ball.vy;
+            //ballA.draw();
+            //ballA.x += ballA.vx;
+            //ballA.y += ballA.vy;
+            balls.forEach(function(item, index, array) {
+                item.draw();
+                item.x += item.vx;
+                item.y += item.vy;
+            });
             raf = window.requestAnimationFrame(draw);
      
         }
-        //document.write(ball.x)
-        document.write(ball.x);
-        document.write("     --    ");
-        document.write(ball.y)
+        
         draw();
 
     </script>
