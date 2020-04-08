@@ -28,7 +28,7 @@
         var canvas = document.querySelector('canvas'),
             ctx = canvas.getContext('2d'),
             particles = [],
-            patriclesNum = 50,
+            patriclesNum = 30,
             w = 500,
             h = 500,
             colors = ['#f35d4f', '#f36849', '#c0d988', '#6ddaf1', '#f1e85b'];
@@ -58,16 +58,21 @@
             console.log("x: " + this.x);
             this.y = Math.round(Math.random() * h);
             console.log("y: " + this.y); // 
-            this.rad = Math.round(Math.random() * 1) + 1;
-            console.log("rad: " + this.rad); // 1 oder 2
-            this.rgba = colors[Math.round(Math.random() * 3)];
-            this.vx = Math.round(Math.random() * 3) - 1.5;
-            this.vy = Math.round(Math.random() * 3) - 1.5;
+            //this.rad = Math.round(Math.random() * 1) + 1;
+            //console.log("rad: " + this.rad); // 1 oder 2
+            this.rad = 2;
+            //this.rgba = colors[Math.round(Math.random() * 3)];
+            this.rgba = "#00CCFF";
+            this.vx = (Math.random() * 1);
+            console.log("vx:" + this.vx);
+            this.vy = (Math.random() * 1);
+            console.log("vy:" + this.vy);
         }
 
         function draw() {
             ctx.clearRect(0, 0, w, h);
-            ctx.globalCompositeOperation = 'lighter';
+            ctx.globalCompositeOperation = 'lighter'; //  display the source and the destination image
+                                                      // xor look nice too
             for (var i = 0; i < patriclesNum; i++) {
                 var temp = particles[i];
                 var factor = 1;
@@ -77,13 +82,14 @@
                     var temp2 = particles[j];
                     ctx.linewidth = 0.5;
 
-                    if (temp.rgba == temp2.rgba && findDistance(temp, temp2) < 50) {
+                    //if (temp.rgba == temp2.rgba && findDistance(temp, temp2) < 50) {
+                    if (findDistance(temp, temp2) < 150) {
                         ctx.strokeStyle = temp.rgba;
                         ctx.beginPath();
                         ctx.moveTo(temp.x, temp.y);
                         ctx.lineTo(temp2.x, temp2.y);
                         ctx.stroke();
-                        factor++;
+                        //factor++;
                     }
                 }
 
@@ -96,10 +102,10 @@
                 ctx.fill();
                 ctx.closePath();
 
-                ctx.beginPath();
+                /* ctx.beginPath();
                 ctx.arc(temp.x, temp.y, (temp.rad + 5) * factor, 0, Math.PI * 2, true);
                 ctx.stroke();
-                ctx.closePath();
+                ctx.closePath(); */
 
 
                 temp.x += temp.vx;
